@@ -1,4 +1,5 @@
 // Created by Namrata Acharya on 4/5/21.
+#pragma once
 #ifndef NAIVE_BAYES_IMAGE_H
 #define NAIVE_BAYES_IMAGE_H
 #endif // NAIVE_BAYES_IMAGE_H
