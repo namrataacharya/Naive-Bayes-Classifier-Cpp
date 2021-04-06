@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <core/image_processor.h>
+#include <core/image.h>
 
 /*
 TEST_CASE("Check that 126 is the best class") {
@@ -11,14 +12,18 @@ TEST_CASE("Check that 126 is the best class") {
 }*/
 
 TEST_CASE("Image processing test") {
-    //REQUIRE(naivebayes::Placeholder().GetBestClass() == "CS 126");
 
     SECTION("set up") {
         naivebayes::ImageProcessor processor;
         std::ifstream test_image_processor("data/trainingimagesandlabels.txt");
 
-        //test_image_processor >> processor;
+        test_image_processor >> processor;
+        int num_labels = processor.GetNumLabels();
+        int num_images = processor.GetNumImages();
 
+        REQUIRE(num_labels == 5000);
+        REQUIRE(num_images == 5000);
+        REQUIRE(true == true);
     }
 }
 

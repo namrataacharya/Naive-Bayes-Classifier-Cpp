@@ -26,10 +26,10 @@ class Model {
 
 
   private:
-    std::vector<Image> training_images_;
+    //std::vector<Image> training_images_;
 
-    std::vector<double> class_chance_;
-    std::vector<double> pixel_shade_chance_;
+    //std::vector<double> class_chance_;
+    //std::vector<double> pixel_shade_chance_;
 
 
 
