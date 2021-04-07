@@ -23,16 +23,17 @@ namespace naivebayes {
 
         int GetLabel();
         int GetLength();
-        std::vector<std::vector<char>> GetPixels();
+        std::vector<std::vector<char>>& GetPixels();
 
         //bool Shaded(int row, int col);
 
     private:
         int length_;
         int label_;
-        //const std::vector<std::vector<char>> pixels_; //NEW (didn't work)
+
         std::vector<std::vector<char>> pixels_;
 
+        //const std::vector<std::vector<char>> pixels_; //NEW (didn't work)
         //std::vector<std::vector<int>> pixels_(n, vector<int> (m));   //SIZE: n rows, m columns
 
     };

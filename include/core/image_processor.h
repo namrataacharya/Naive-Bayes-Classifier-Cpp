@@ -12,20 +12,20 @@ class ImageProcessor {
 
 public:
     ImageProcessor();
-    //void SetSide(int side_length);
-    //int GetSide();
 
-    std::vector<Image> GetImages();
+    std::vector<Image>& GetImages();
     std::vector<int> GetClasses();
     int GetImageLength();
-    //void SetImageLength(int length);
 
     int GetNumLabels();
     int GetNumImages();
+    /*
     int GetLineCount();
     //int GetLineCount2();
+     //void SetImageLength(int length);
+     //void SetSide(int side_length);
+    //int GetSide();
 
-    /*
     void LabelsPlus1(); //testing
     void ImagesPlus1(); //testing*/
 
@@ -43,8 +43,6 @@ private:
 
     int line_count_ = 1;
     //int line_count_2_ = 1;
-
-
 
 };
 }  // namespace naivebayes

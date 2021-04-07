@@ -9,7 +9,7 @@ namespace naivebayes {
     ImageProcessor::ImageProcessor() {}
 
 
-    std::vector<Image> ImageProcessor::GetImages() {
+    std::vector<Image>& ImageProcessor::GetImages() {
         return images_;
     }
 
@@ -34,9 +34,10 @@ namespace naivebayes {
         return test_num_labels_;
     }
 
+    /*
     int ImageProcessor::GetLineCount() { //TESTING
         return line_count_;
-    }
+    }*/
 
     /*
     int ImageProcessor::GetLineCount2() { //TESTING

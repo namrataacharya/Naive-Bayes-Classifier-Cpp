@@ -29,7 +29,7 @@ namespace naivebayes {
         return length_;
     }
 
-    std::vector<std::vector<char>> Image::GetPixels() {
+    std::vector<std::vector<char>>& Image::GetPixels() {
         return pixels_;
     }
 
