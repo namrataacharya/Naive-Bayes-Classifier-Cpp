@@ -27,6 +27,8 @@ class Model {
 
     void CalculatePixelProbability();
 
+    bool PixelShaded(Image &image, int row, int col);
+
     void LoadModel();
 
     void SaveModel();
@@ -43,16 +45,25 @@ class Model {
 
 
     std::vector<Image> training_images_;
-    std::vector<int> image_classes_;
+    //std::vector<int> image_classes_;
 
     std::unordered_map<int, int> class_frequency_;
+    std::unordered_map<int, double> class_probability_;
+    //std::unordered_map<int, double> pixel_probability;
+
+    //map[row (i)][col (j)][shaded (bool)][class (c)] - see slides
+    /*
+    std::unordered_map<int, std::unordered_map<int,
+        std::unordered_map<bool, std::unordered_map<int, double>>>> pixel_probability;
+        */
+
+    //std::vector<std::vector<int>
+    std::vector<std::vector<std::vector<std::vector<int>>>> pixel_probability_;
+
 
 
     //std::vector<double> class_chance_;
     //std::vector<double> pixel_shade_chance_;
-
-
-
 };
 
 }  // namespace naivebayes

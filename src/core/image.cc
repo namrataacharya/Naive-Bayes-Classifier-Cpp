@@ -34,6 +34,14 @@ namespace naivebayes {
     }
 
     /*
+    bool Image::Shaded(int row, int col) {
+        //char blank = ' ';
+        if (pixels_[row][col] == ' ') {
+            return false;
+        }
+        return true;
+    }*/
+    /*
     Image::Image(int rows, int columns) {
         side_ = rows;
     }*/
