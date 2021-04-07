@@ -9,7 +9,7 @@ namespace naivebayes {
     ImageProcessor::ImageProcessor() {}
 
 
-    std::vector<Image>& ImageProcessor::GetImages() {
+    std::vector<Image> ImageProcessor::GetImages() {
         return images_;
     }
 

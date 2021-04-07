@@ -31,7 +31,12 @@ class Model {
 
     double GetClassProbability(int c);
 
-    double GetPixelProbability(int row, int col, bool shaded, int c);
+    //double GetPixelProbability(int row, int col, bool shaded, int c);
+    double GetPixelProbability(double row, double col, double shaded, double c);
+
+    std::vector<Image> GetTrainingImages();
+
+
 
     void LoadModel();
 
@@ -56,7 +61,9 @@ class Model {
 
     //OG IMPLEMENTATION
     std::vector<Image> training_images_; //WORKS W/ BOTH
-    std::vector<std::vector<std::vector<std::vector<int>>>> pixel_probability_; //WORKS W/ BOTH
+    std::vector<std::vector<std::vector<std::vector<double>>>> pixel_probability_; //WORKS W/ BOTH (Double)
+
+    //std::vector<std::vector<std::vector<std::vector<int>>>> pixel_probability_; //WORKS W/ BOTH
     //std::vector<int> pixel_probability_;
 
     //IGNORE FOR NOW

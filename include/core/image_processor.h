@@ -13,11 +13,12 @@ class ImageProcessor {
 public:
     ImageProcessor();
 
-    std::vector<Image>& GetImages();
+    std::vector<Image> GetImages();
     std::vector<int> GetClasses();
     int GetImageLength();
 
-    int GetNumLabels();
+    int GetNumLabels(); //why is this going wrong
+
     int GetNumImages();
     /*
     int GetLineCount();

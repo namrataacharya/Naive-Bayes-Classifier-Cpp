@@ -77,6 +77,7 @@ void Model::CalculatePixelProbability() { // P(F(i,j) = f | class = c)
     //vector<vector<vector<vector<int>>>> vec(100, vector<vector<vector<int>>>(200, vector<vector<int>>(100, vector<int>(50))));
     int v = 2;
 
+    /*
     std::vector<
             std::vector<
                     std::vector<
@@ -84,10 +85,18 @@ void Model::CalculatePixelProbability() { // P(F(i,j) = f | class = c)
                                                            std::vector<std::vector<std::vector<int>>>(image_width_,
                                                            std::vector<std::vector<int>>(v, // T(1) / F(0)
                                                            std::vector<int>(num_classes_)))); //was class_frequency_.size()
+                                                           */
 
+    std::vector<
+            std::vector<
+                    std::vector<
+                            std::vector<double>>>> pixel_match_count(image_width_,
+                                                                  std::vector<std::vector<std::vector<double>>>(image_width_,
+                                                                  std::vector<std::vector<double>>(v, // T(1) / F(0)
+                                                                  std::vector<double>(num_classes_)))); //was class_frequency_.size()
 
     //vector[row (i)][col (j)][shaded (0 or 1)][class (c)] - see slides
-    //pixel_probability_(pixel_match_count);
+
     pixel_probability_ = pixel_match_count;
 
     //VECTOR IMPLEMENTATION
@@ -102,22 +111,25 @@ void Model::CalculatePixelProbability() { // P(F(i,j) = f | class = c)
                             pixel_match_count[i][j][0][c] += 0; // 0 = UNSHADED
 
                             //Delete?
-                            pixel_probability_[i][j][1][c] = (k_ + pixel_match_count[i][j][1][c])
-                                                                 / ((v * k_) + class_frequencies_[c]);
+                            /*
+                            pixel_probability_[i][j][1][c] = (double(k_ + pixel_match_count[i][j][1][c])
+                                                                 / double((v * k_) + class_frequencies_[c]));
 
-                            pixel_probability_[i][j][0][c] = (k_ + pixel_match_count[i][j][1][c])
-                                                             / ((v * k_) + class_frequencies_[c]);
+                            pixel_probability_[i][j][0][c] = (double(k_ + pixel_match_count[i][j][1][c])
+                                                             / double((v * k_) + class_frequencies_[c]));
+                                                             */
 
                         } else {
                             pixel_match_count[i][j][1][c] += 0; // 1 = SHADED
                             pixel_match_count[i][j][0][c]++; // 0 = UNSHADED
 
                             //Delete?
-                            pixel_probability_[i][j][1][c] = (k_ + pixel_match_count[i][j][1][c])
-                                                             / ((v * k_) + class_frequencies_[c]);
+                            /*
+                            pixel_probability_[i][j][1][c] = (double(k_ + pixel_match_count[i][j][1][c])
+                                                             / double((v * k_) + class_frequencies_[c]));
 
-                            pixel_probability_[i][j][0][c] = (k_ + pixel_match_count[i][j][1][c])
-                                                             / ((v * k_) + class_frequencies_[c]);
+                            pixel_probability_[i][j][0][c] = (double(k_ + pixel_match_count[i][j][1][c])
+                                                             / double((v * k_) + class_frequencies_[c]));*/
                         }
                     }
                 }
@@ -126,17 +138,19 @@ void Model::CalculatePixelProbability() { // P(F(i,j) = f | class = c)
     }
 
     //VECTOR IMPLEMENTATION
-    /*
+    ///*
+
     for (int i = 0; i < image_width_; i++) {
         for (int j = 0; j < image_width_; j++) {
             for (int shade = 0; shade < v; shade++) {
                 for (int c = 0; c < class_frequencies_.size(); c++) {
-                    pixel_probability_[i][j][shade][c] = (k_ + pixel_match_count[i][j][shade][c])
-                            / ((v * k_) + class_frequencies_[c]);
+                    pixel_probability_[i][j][shade][c] = (double(k_ + pixel_match_count[i][j][shade][c])
+                            / double((v * k_) + class_frequencies_[c]));
                 }
             }
         }
-    }*/
+    }
+     //*/
 
     //OLD WAY - DELETE?
     /*
@@ -224,12 +238,20 @@ double Model::GetClassProbability(int c) {
     return class_probabilities_[c]; //vector way
 }
 
+double Model::GetPixelProbability(double row, double col, double shaded, double c) {
+    if (shaded == true) {
+        return pixel_probability_[row][col][1][c]; //shaded
+    }
+    return pixel_probability_[row][col][0][c]; //unshaded
+}
+/*
 double Model::GetPixelProbability(int row, int col, bool shaded, int c) {
     if (shaded == true) {
         return pixel_probability_[row][col][1][c]; //shaded
     }
     return pixel_probability_[row][col][0][c]; //unshaded
 }
+ */
 
 
 // >> - Loads Model from file (OVERLOAD)
@@ -244,9 +266,10 @@ void Model::SaveModel() {}
 std::vector<int> Model::GetImageClasses() {
     return image_classes_;
 }
+ */
 
 std::vector<Image> Model::GetTrainingImages() {
     return training_images_;
-}*/
+}
 
 }  // namespace naivebayes
