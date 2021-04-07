@@ -6,50 +6,68 @@
 #include <core/image_processor.h>
 #include <core/image.h>
 
-/*
-TEST_CASE("Check that 126 is the best class") {
-  REQUIRE(naivebayes::Placeholder().GetBestClass() == "CS 126");
-}*/
 
 TEST_CASE("Image processing test") {
     //145001 lines in txt file
 
-    SECTION("set up") {
+    ///*
+    SECTION("set up") { //works
+        //naivebayes::Model model;
         naivebayes::ImageProcessor processor;
+
 
         std::ifstream test_image_processor("../../../../../../data/trainingimagesandlabels.txt");
 
-        //std::ifstream test_image_processor;
-        //test_image_processor.open("data/trainingimagesandlabels.txt");
+        test_image_processor >> processor;
+
+        naivebayes::Model model(processor);
+
+        int length = processor.GetImageLength();
+        int num_labels = processor.GetNumLabels();
+        int num_images = processor.GetNumImages();
+
+        int vec_size = processor.GetImages().size();
+
+        //int training_imgs_size = model.GetTrainingImages().size();
+        //REQUIRE(training_imgs_size == 5000);
+
+        REQUIRE(length == 28);
+        REQUIRE(num_labels == 5000);
+        REQUIRE(num_images == 5000);
+        REQUIRE(vec_size == 5000); //should be 5000 images in vector
+    }//*/
+
+
+    /*
+    SECTION("image class vec (Model)") {
+        //naivebayes::Model model;
+        naivebayes::ImageProcessor processor;
+
+
+        std::ifstream test_image_processor("../../../../../../data/trainingimagesandlabels.txt");
 
         test_image_processor >> processor;
 
-        /*
-        if (test_image_processor.is_open()) {
-            test_image_processor >> processor;
-            test_image_processor.close();
+        naivebayes::Model model(processor);
+        std::vector<int> model_vector = model.GetImageClasses();
+        std::vector<int> actual_classes;
+        for (int i = 0; i < 10; i++) {
+            actual_classes.push_back(i);
         }
-        */
-
-
-        int num_labels = processor.GetNumLabels();
-        int num_images = processor.GetNumImages();
-        //int test_line_count = processor.GetLineCount();
-        //int test_line_count2 = processor.GetLineCount2(); //DELETE
-
-        //int num_images = processor.GetImages().size();
 
 
         int length = processor.GetImageLength();
-        REQUIRE(length == 28);
+        int num_labels = processor.GetNumLabels();
+        int num_images = processor.GetNumImages();
 
-        //REQUIRE(test_line_count == 145001);
-        //REQUIRE(test_line_count2 == 2); //this one works, while(getline()) NOT RUNNING - DELETE
+
+        REQUIRE(length == 28);
         REQUIRE(num_labels == 5000);
         REQUIRE(num_images == 5000);
 
-        REQUIRE(true == true);
-    }
+        REQUIRE(actual_classes == model_vector);
+    }*/
+
 }
 
 

@@ -13,11 +13,11 @@ namespace naivebayes {
     public:
         /*
         Image(int rows, int columns);
-        Image(int side_length);*/
-        /*
+        Image(int side_length);
+
         void SetSide(int side_length);
-        int GetSide();*/
-        /*
+        int GetSide();
+
         //Image();
         //Image(int label, int length);*/
 

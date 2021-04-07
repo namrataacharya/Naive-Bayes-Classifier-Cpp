@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "image.h"
+#include "image_processor.h"
 
 namespace naivebayes {
 
@@ -16,6 +17,10 @@ class Model {
     //load model from file
 
     Model();
+    Model(ImageProcessor &processor);
+
+    std::vector<int> GetImageClasses();
+    std::vector<Image> GetTrainingImages();
 
     void LoadModel();
     void SaveModel();
@@ -27,7 +32,11 @@ class Model {
 
 
   private:
-    //std::vector<Image> training_images_;
+
+    int image_width;
+
+    std::vector<Image> training_images_;
+    std::vector<int> image_classes_;
 
     //std::vector<double> class_chance_;
     //std::vector<double> pixel_shade_chance_;
