@@ -17,23 +17,18 @@ namespace naivebayes {
         return classes_;
     }
 
-    int ImageProcessor::GetImageLength() { //TESTING
+    int ImageProcessor::GetImageLength() {
         return image_length_;
     }
 
-    /*
-    void ImageProcessor::SetImageLength(int length) {
-        image_length_ = length;
-    }*/
-
-    /*
+    ///*
     int ImageProcessor::GetNumImages() { //TESTING
         return test_num_images;
     }
 
     int ImageProcessor::GetNumLabels() { //TESTING
         return test_num_labels_;
-    }*/
+    }//*/
 
     std::istream &operator>>(std::istream &in, ImageProcessor &processor) {
 
@@ -44,12 +39,13 @@ namespace naivebayes {
         int line_count = 1;
 
         while (getline(in, line1)) {
-            if (line_count == 2) {   // lines in txt file AFTER label
-                side_length = line1.size(); // image length/width
+            if (line_count == 2) {
+                side_length = line1.size();
 
                 processor.image_length_ = side_length;
                 break;
             }
+
             line_count++;
             processor.line_count_++;
         }
@@ -66,7 +62,6 @@ namespace naivebayes {
 
             //finds labels
             if (line.size() == 1) {
-                // for loop goes 28 times
                 label = std::stoi(line);
                 processor.test_num_labels_++;
 
@@ -77,6 +72,7 @@ namespace naivebayes {
 
                 Image image = Image(label, side_length, pixels);
 
+
                 //check if new image class/label has been found
                 int label_freq = 0;
                 for (int i = 0; i < processor.classes_.size(); i++) {
@@ -85,8 +81,9 @@ namespace naivebayes {
                     }
                 }
 
+                //adds new image class/label to classes_ vector
                 if(label_freq == 0) {
-                    processor.classes_.push_back(label); //adds new image class/label to classes_ vector
+                    processor.classes_.push_back(label);
                 }
 
                 processor.images_.push_back(image);

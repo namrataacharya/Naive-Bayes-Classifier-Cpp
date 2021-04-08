@@ -8,35 +8,7 @@
 
 
 TEST_CASE("Image processing test") {
-    /*
-    SECTION("trainingimagesandlabels.txt Set Up") { //works
-        //naivebayes::Model model;
-        naivebayes::ImageProcessor processor;
-
-
-        std::ifstream test_image_processor("../../../../../../data/trainingimagesandlabels.txt");
-
-        test_image_processor >> processor;
-
-        naivebayes::Model model(processor);
-
-        int length = processor.GetImageLength();
-        int num_labels = processor.GetNumLabels();
-        int num_images = processor.GetNumImages();
-
-        //int vec_size = processor.GetImages().size();
-
-        //int training_imgs_size = model.GetTrainingImages().size();
-        //REQUIRE(training_imgs_size == 5000);
-
-        REQUIRE(length == 28);
-        REQUIRE(num_labels == 5000);
-        REQUIRE(num_images == 5000);
-        //REQUIRE(vec_size == 5000); //should be 5000 images in vector
-    }
-    */
-
-    SECTION("testsample.txt Set Up") { //works
+    SECTION("testsample.txt Set Up") {
         naivebayes::ImageProcessor processor;
 
         std::ifstream test_image_processor("../../../../../../data/testsample.txt");
@@ -54,35 +26,6 @@ TEST_CASE("Image processing test") {
         REQUIRE(num_training_images == 3);
         REQUIRE(vec_size == 3);
     }
-    /*
-    SECTION("image class vec (Model)") {
-        //naivebayes::Model model;
-        naivebayes::ImageProcessor processor;
-
-
-        std::ifstream test_image_processor("../../../../../../data/trainingimagesandlabels.txt");
-
-        test_image_processor >> processor;
-
-        naivebayes::Model model(processor);
-        std::vector<int> model_vector = model.GetImageClasses();
-        std::vector<int> actual_classes;
-        for (int i = 0; i < 10; i++) {
-            actual_classes.push_back(i);
-        }
-
-
-        int length = processor.GetImageLength();
-        int num_labels = processor.GetNumLabels();
-        int num_images = processor.GetNumImages();
-
-
-        REQUIRE(length == 28);
-        REQUIRE(num_labels == 5000);
-        REQUIRE(num_images == 5000);
-
-        REQUIRE(actual_classes == model_vector);
-    }*/
 }
 
 TEST_CASE("Pixel shade probability tests: P(F(i,j) = 0 | class = 0)") {
@@ -240,7 +183,6 @@ TEST_CASE("Pixel shade probability tests: P(F(i,j) = 0 | class = 1)") {
         REQUIRE(calculated_probability == Approx(0.5));
     }
 }
-
 
 TEST_CASE("Pixel shade probability tests: P(F(i,j) = 1 | class = 1)") {
     naivebayes::ImageProcessor processor;

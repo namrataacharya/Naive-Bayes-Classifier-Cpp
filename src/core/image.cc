@@ -3,17 +3,8 @@
 #include <core/naive_bayes_model.h>
 #include <core/image.h>
 #include <iostream>
-//#include "core/image.h"
 
 namespace naivebayes {
-
-    //Image::Image() {}
-
-    /*
-    Image::Image(int label, int length) {
-        label_ = label;
-        length_ = length;
-    }*/
 
     Image::Image(int label, int length, std::vector<std::vector<char>> &pixels) {
         label_ = label;
@@ -32,27 +23,5 @@ namespace naivebayes {
     std::vector<std::vector<char>>& Image::GetPixels() {
         return pixels_;
     }
-
-    /*
-    bool Image::Shaded(int row, int col) {
-        //char blank = ' ';
-        if (pixels_[row][col] == ' ') {
-            return false;
-        }
-        return true;
-    }*/
-    /*
-    Image::Image(int rows, int columns) {
-        side_ = rows;
-    }*/
-    /*
-    std::istream &operator>>(std::istream &in, std::string training_data) { //Image img) { //std::string training_data) {
-        std::string line;
-        while(getline(in, line)) {
-            //side
-
-        }
-        return in;
-    }*/
 
 }  // namespace naivebayes

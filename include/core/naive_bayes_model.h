@@ -11,12 +11,8 @@ class Model {
 
   public:
 
-    //calculate probabilities for each class
-    //calculate conditional probabilities o a pixel being (un)shaded
-    //save trained model to a file
-    //load model from file
-
     Model();
+
     Model(ImageProcessor &processor);
 
     void TrainModel(int k);
@@ -31,62 +27,26 @@ class Model {
 
     double GetClassProbability(int c);
 
-    //double GetPixelProbability(int row, int col, bool shaded, int c);
     double GetPixelProbability(double row, double col, double shaded, double c);
 
     friend std::istream &operator>>(std::istream &in, Model &model);
+
     friend std::ostream &operator<<(std::ostream &out, Model &model);
 
-
     std::vector<Image> GetTrainingImages();
-
-    /*
-
-    void LoadModel();
-
-    void SaveModel();
-     */
-    /*
-  std::vector<int> GetImageClasses();
-  std::vector<Image> GetTrainingImages();
-   */
 
   private:
 
     int image_width_;
     int num_classes_;
-    int k_ = 1; //laplace smoothing
-    int v_ = 2; //default (faulty)
+    int k_ = 1;
+    int v_ = 2;
 
-
-    //VECTOR IMPLEMENTATION
     std::vector<int> class_frequencies_;
     std::vector<double> class_probabilities_;
+    std::vector<Image> training_images_;
+    std::vector<std::vector<std::vector<std::vector<double>>>> pixel_probability_;
 
-
-    //OG IMPLEMENTATION
-    std::vector<Image> training_images_; //WORKS W/ BOTH
-    std::vector<std::vector<std::vector<std::vector<double>>>> pixel_probability_; //WORKS W/ BOTH (Double)
-
-    /*
-    //std::vector<std::vector<std::vector<std::vector<int>>>> pixel_probability_; //WORKS W/ BOTH
-    //std::vector<int> pixel_probability_;
-
-    //IGNORE FOR NOW
-    //std::unordered_map<int, int> class_frequency_;
-    //std::unordered_map<int, double> class_probability_;
-
-
-
-    //std::vector<int> image_classes_;
-    //map[row (i)][col (j)][shaded (bool)][class (c)] - see slides
-
-    //std::unordered_map<int, std::unordered_map<int,
-        //std::unordered_map<bool, std::unordered_map<int, double>>>> pixel_probability;
-    //std::unordered_map<int, double> pixel_probability;
-    //std::vector<double> class_chance_;
-    //std::vector<double> pixel_shade_chance_;
-     */
 };
 
 }  // namespace naivebayes
