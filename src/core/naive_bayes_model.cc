@@ -227,10 +227,10 @@ void Model::CalculatePixelProbability() { // P(F(i,j) = f | class = c)
 }
 
 bool Model::PixelShaded(Image &image, int row, int col) {
-    if (image.GetPixels()[row][col] == ' ') {
-        return false; // 0 = unshaded
+    if (image.GetPixels()[row][col] == '#' || image.GetPixels()[row][col] == '+') {
+        return true; // 0 = unshaded
     }
-    return true; // 1 = shaded
+    return false; // 1 = shaded
 }
 
 double Model::GetClassProbability(int c) {
@@ -239,6 +239,7 @@ double Model::GetClassProbability(int c) {
 }
 
 double Model::GetPixelProbability(double row, double col, double shaded, double c) {
+
     if (shaded == true) {
         return pixel_probability_[row][col][1][c]; //shaded
     }

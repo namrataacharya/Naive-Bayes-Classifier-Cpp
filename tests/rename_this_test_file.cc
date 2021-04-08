@@ -8,7 +8,6 @@
 
 
 TEST_CASE("Image processing test") {
-    //145001 lines in txt file
     /*
     SECTION("trainingimagesandlabels.txt Set Up") { //works
         //naivebayes::Model model;
@@ -86,59 +85,213 @@ TEST_CASE("Image processing test") {
     }*/
 }
 
-TEST_CASE("Pixel shade probability tests: P(F(i,j)=f|class=c)") {
-    /*
+TEST_CASE("Pixel shade probability tests: P(F(i,j) = 0 | class = 0)") {
     naivebayes::ImageProcessor processor;
 
     std::ifstream test_image_processor("../../../../../../data/testsample.txt");
     test_image_processor >> processor;
 
     naivebayes::Model model(processor);
-    model.TrainModel(1);*/
+    model.TrainModel(1);
 
-    //f = 0 --> UNSHADED
-    //f = 1 --> SHADED
-
+    //ROW 1
     SECTION("P(F(0,0) = 0 | class = 0)") {
-        naivebayes::ImageProcessor processor;
-
-        std::ifstream test_image_processor("../../../../../../data/testsample.txt");
-        test_image_processor >> processor;
-
-        naivebayes::Model model(processor);
-        model.TrainModel(1);
         double calculated_probability = model.GetPixelProbability(0, 0, false, 0);
         REQUIRE(calculated_probability == Approx(0.33333));
     }
-    /*
-    SECTION("image class vec (Model)") {
-        //naivebayes::Model model;
-        naivebayes::ImageProcessor processor;
+    SECTION("P(F(0,1) = 0 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(0, 1, false, 0);
+        REQUIRE(calculated_probability == Approx(0.33333));
+    }
+    SECTION("P(F(0,2) = 0 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(0, 2, false, 0);
+        REQUIRE(calculated_probability == Approx(0.33333));
+    }
+
+    //ROW 2
+    SECTION("P(F(1,0) = 0 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(1, 0, false, 0);
+        REQUIRE(calculated_probability == Approx(0.33333));
+    }
+    SECTION("P(F(1,1) = 0 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(1, 1, false, 0);
+        REQUIRE(calculated_probability == Approx(0.66667));
+    }
+    SECTION("P(F(1,2) = 0 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(1, 2, false, 0);
+        REQUIRE(calculated_probability == Approx(0.33333));
+    }
+
+    //ROW 3
+    SECTION("P(F(2,0) = 0 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(2, 0, false, 0);
+        REQUIRE(calculated_probability == Approx(0.33333));
+    }
+    SECTION("P(F(2,1) = 0 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(2, 1, false, 0);
+        REQUIRE(calculated_probability == Approx(0.33333));
+    }
+    SECTION("P(F(2,2) = 0 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(2, 2, false, 0);
+        REQUIRE(calculated_probability == Approx(0.33333));
+    }
+}
+
+TEST_CASE("Pixel shade probability tests: P(F(i,j) = 1 | class = 0)") {
+    naivebayes::ImageProcessor processor;
+
+    std::ifstream test_image_processor("../../../../../../data/testsample.txt");
+    test_image_processor >> processor;
+
+    naivebayes::Model model(processor);
+    model.TrainModel(1);
+
+    //ROW 1
+    SECTION("P(F(0,0) = 1 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(0, 0, true, 0);
+        REQUIRE(calculated_probability == Approx(0.66667));
+    }
+    SECTION("P(F(0,1) = 1 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(0, 1, true, 0);
+        REQUIRE(calculated_probability == Approx(0.66667));
+    }
+    SECTION("P(F(0,2) = 1 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(0, 2, true, 0);
+        REQUIRE(calculated_probability == Approx(0.66667));
+    }
+
+    //ROW 2
+    SECTION("P(F(1,0) = 1 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(1, 0, true, 0);
+        REQUIRE(calculated_probability == Approx(0.66667));
+    }
+    SECTION("P(F(1,1) = 1 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(1, 1, true, 0);
+        REQUIRE(calculated_probability == Approx(0.33333));
+    }
+    SECTION("P(F(1,2) = 1 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(1, 2, true, 0);
+        REQUIRE(calculated_probability == Approx(0.66667));
+    }
+
+    //ROW 3
+    SECTION("P(F(2,0) = 1 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(2, 0, true, 0);
+        REQUIRE(calculated_probability == Approx(0.66667));
+    }
+    SECTION("P(F(2,1) = 1 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(2, 1, true, 0);
+        REQUIRE(calculated_probability == Approx(0.66667));
+    }
+    SECTION("P(F(2,2) = 1 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(2, 2, true, 0);
+        REQUIRE(calculated_probability == Approx(0.66667));
+    }
+}
+
+TEST_CASE("Pixel shade probability tests: P(F(i,j) = 0 | class = 1)") {
+    naivebayes::ImageProcessor processor;
+
+    std::ifstream test_image_processor("../../../../../../data/testsample.txt");
+    test_image_processor >> processor;
+
+    naivebayes::Model model(processor);
+    model.TrainModel(1);
+
+    //ROW 1
+    SECTION("P(F(0,0) = 1 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(0, 0, false, 1);
+        REQUIRE(calculated_probability == Approx(0.5));
+    }
+    SECTION("P(F(0,1) = 1 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(0, 1, false, 1);
+        REQUIRE(calculated_probability == Approx(0.25));
+    }
+    SECTION("P(F(0,2) = 1 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(0, 2, false, 1);
+        REQUIRE(calculated_probability == Approx(0.75));
+    }
+
+    //ROW 2
+    SECTION("P(F(1,0) = 1 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(1, 0, false, 1);
+        REQUIRE(calculated_probability == Approx(0.75));
+    }
+    SECTION("P(F(1,1) = 1 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(1, 1, false, 1);
+        REQUIRE(calculated_probability == Approx(0.25));
+    }
+    SECTION("P(F(1,2) = 1 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(1, 2, false, 1);
+        REQUIRE(calculated_probability == Approx(0.75));
+    }
+
+    //ROW 3
+    SECTION("P(F(2,0) = 1 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(2, 0, false, 1);
+        REQUIRE(calculated_probability == Approx(0.5));
+    }
+    SECTION("P(F(2,1) = 1 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(2, 1, false, 1);
+        REQUIRE(calculated_probability == Approx(0.25));
+    }
+    SECTION("P(F(2,2) = 1 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(2, 2, false, 1);
+        REQUIRE(calculated_probability == Approx(0.5));
+    }
+}
 
 
-        std::ifstream test_image_processor("../../../../../../data/trainingimagesandlabels.txt");
+TEST_CASE("Pixel shade probability tests: P(F(i,j) = 1 | class = 1)") {
+    naivebayes::ImageProcessor processor;
 
-        test_image_processor >> processor;
+    std::ifstream test_image_processor("../../../../../../data/testsample.txt");
+    test_image_processor >> processor;
 
-        naivebayes::Model model(processor);
-        std::vector<int> model_vector = model.GetImageClasses();
-        std::vector<int> actual_classes;
-        for (int i = 0; i < 10; i++) {
-            actual_classes.push_back(i);
-        }
+    naivebayes::Model model(processor);
+    model.TrainModel(1);
 
+    //ROW 1
+    SECTION("P(F(0,0) = 1 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(0, 0, true, 1);
+        REQUIRE(calculated_probability == Approx(0.5));
+    }
+    SECTION("P(F(0,1) = 1 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(0, 1, true, 1);
+        REQUIRE(calculated_probability == Approx(0.75));
+    }
+    SECTION("P(F(0,2) = 1 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(0, 2, true, 1);
+        REQUIRE(calculated_probability == Approx(0.25));
+    }
 
-        int length = processor.GetImageLength();
-        int num_labels = processor.GetNumLabels();
-        int num_images = processor.GetNumImages();
+    //ROW 2
+    SECTION("P(F(1,0) = 1 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(1, 0, true, 1);
+        REQUIRE(calculated_probability == Approx(0.25));
+    }
+    SECTION("P(F(1,1) = 1 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(1, 1, true, 1);
+        REQUIRE(calculated_probability == Approx(0.75));
+    }
+    SECTION("P(F(1,2) = 1 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(1, 2, true, 1);
+        REQUIRE(calculated_probability == Approx(0.25));
+    }
 
-
-        REQUIRE(length == 28);
-        REQUIRE(num_labels == 5000);
-        REQUIRE(num_images == 5000);
-
-        REQUIRE(actual_classes == model_vector);
-    }*/
+    //ROW 3
+    SECTION("P(F(2,0) = 1 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(2, 0, true, 1);
+        REQUIRE(calculated_probability == Approx(0.5));
+    }
+    SECTION("P(F(2,1) = 1 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(2, 1, true, 1);
+        REQUIRE(calculated_probability == Approx(0.75));
+    }
+    SECTION("P(F(2,2) = 1 | class = 0)") {
+        double calculated_probability = model.GetPixelProbability(2, 2, true, 1);
+        REQUIRE(calculated_probability == Approx(0.5));
+    }
 }
 
 TEST_CASE("Class probability tests: P(class=c)") {
