@@ -316,12 +316,29 @@ TEST_CASE("Class probability tests: P(class=c)") {
 
 TEST_CASE("Save/load model from file") {
     naivebayes::ImageProcessor processor;
-
     std::ifstream test_image_processor("../../../../../../data/testsample.txt");
     test_image_processor >> processor;
 
+    //trains model to be saved
     naivebayes::Model model(processor);
     model.TrainModel(1);
+
+    //creates file to save model in /data/saved_file.txt
+    std::ofstream saved_file("../../../../../../data/saved_file.txt");
+
+    //creates new model loaded from file
+    naivebayes::Model new_model;
+    std::ifstream loaded_file("../../../../../../data/saved_file.txt");
+
+    saved_file << model;
+    loaded_file >> new_model;
+
+    SECTION("P(class = 0) equality for both models") {
+        REQUIRE(model.GetClassProbability(0) == Approx(new_model.GetClassProbability(0)));
+    }
+    SECTION("P(class = 1) equality for both models") {
+        REQUIRE(model.GetClassProbability(1) == Approx(new_model.GetClassProbability(1)));
+    }
 }
 
 /*

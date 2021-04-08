@@ -228,9 +228,15 @@ double Model::GetPixelProbability(int row, int col, bool shaded, int c) {
 // >> - Loads Model from file (OVERLOAD)
 std::istream &operator>>(std::istream &in, Model &model) {
 
+    int width;
+    in >> width;
+    model.image_width_ = width;
+
     int num_classes;
     in >> num_classes;
     model.num_classes_ = num_classes;
+
+
 
     for (int i = 0; i < num_classes; i++) {
         double probability;
@@ -240,8 +246,8 @@ std::istream &operator>>(std::istream &in, Model &model) {
         model.class_probabilities_[i] = probability;
     }
 
+    /*
     std::string line;
-
     while (getline(in,line)) {
         int i;
         int j;
@@ -251,6 +257,26 @@ std::istream &operator>>(std::istream &in, Model &model) {
         in >> i >> j >> shade >> c >> probability;
         model.image_width_ = i;
         model.pixel_probability_[i][j][shade][c] = probability;
+    }*/
+
+    //INITIALIZE PIXEL_PROBABILITY 4D VECTOR!
+    std::vector<
+        std::vector<
+            std::vector<
+                std::vector<double>>>> pixel_vector(width, std::vector<std::vector<std::vector<double>>>(width,
+                                                                std::vector<std::vector<double>>(model.v_,
+                                                                   std::vector<double>(model.num_classes_))));
+
+    model.pixel_probability_ = pixel_vector;
+    while (!in.eof()) {
+        int i;
+        int j;
+        int shade;
+        int c;
+        double probability;
+
+        in >> i >> j >> shade >> c >> probability;
+        model.pixel_probability_[i][j][shade][c] = probability;
     }
 
     return in;
@@ -258,6 +284,9 @@ std::istream &operator>>(std::istream &in, Model &model) {
 
 // << - Save Model to file (OVERLOAD)
 std::ostream &operator<<(std::ostream &out, Model &model) {
+
+    int image_dimensions = model.image_width_;
+    out << image_dimensions << std::endl;
 
     int num_classes = model.class_probabilities_.size();
     out << num_classes << std::endl;
