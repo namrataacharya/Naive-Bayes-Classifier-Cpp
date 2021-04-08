@@ -8,7 +8,6 @@ namespace naivebayes {
 
     ImageProcessor::ImageProcessor() {}
 
-
     std::vector<Image> ImageProcessor::GetImages() {
         return images_;
     }
@@ -20,15 +19,6 @@ namespace naivebayes {
     int ImageProcessor::GetImageLength() {
         return image_length_;
     }
-
-    ///*
-    int ImageProcessor::GetNumImages() { //TESTING
-        return test_num_images;
-    }
-
-    int ImageProcessor::GetNumLabels() { //TESTING
-        return test_num_labels_;
-    }//*/
 
     std::istream &operator>>(std::istream &in, ImageProcessor &processor) {
 

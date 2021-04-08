@@ -282,11 +282,3 @@ TEST_CASE("Save/load model from file") {
         REQUIRE(model.GetClassProbability(1) == Approx(new_model.GetClassProbability(1)));
     }
 }
-
-/*
-TODO: Rename this test file. You'll also need to modify CMakeLists.txt.
-
-Make sure to add any files that you create to CMakeLists.txt.
-
-TODO Delete this comment and the placeholder test before submitting your code.
-*/

@@ -11,18 +11,33 @@ namespace naivebayes {
 class ImageProcessor {
 
 public:
+
+    /**
+     * Default constructor that creates an processor
+     */
     ImageProcessor();
 
+    /**
+     * Gets the images found in the txt file
+     * @return vector of Image objects
+     */
     std::vector<Image> GetImages();
 
+    /**
+     * Gets the distinct labels/image classes found in the txt file
+     * @return vector of distinct image labels
+     */
     std::vector<int> GetClasses();
 
+    /**
+     * Gets the length the images found in the txt file
+     * @return number representing image length
+     */
     int GetImageLength();
 
-    int GetNumImages();
-
-    int GetNumLabels();
-
+    /**
+     * Overloads >> operator and reads contents of txt file
+     */
     friend std::istream &operator>>(std::istream &in, ImageProcessor &processor);
 
 private:

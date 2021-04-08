@@ -40,8 +40,6 @@ void Model::FindClassFrequencies() {
 
 // P(class = c)
 void Model::CalculateClassProbability() {
-    // (k_ + class_frequency_[c]) / (vk_ + training_images_.size())
-
     int v = class_frequencies_.size();
 
     for (int i = 0; i < num_classes_; i++) {
