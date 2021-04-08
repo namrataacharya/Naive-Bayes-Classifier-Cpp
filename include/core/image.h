@@ -11,30 +11,21 @@ namespace naivebayes {
     class Image {
 
     public:
-        /*
-        void SetSide(int side_length);
-        int GetSide();
 
-        //Image();
-        //Image(int label, int length);*/
-
-        //Image(int label, int length, const std::vector<std::vector<char>> &pixels); //NEW (didn't work)
         Image(int label, int length, std::vector<std::vector<char>> &pixels);
 
         int GetLabel();
+
         int GetLength();
+
         std::vector<std::vector<char>>& GetPixels();
 
-        //bool Shaded(int row, int col);
-
     private:
+
         int length_;
         int label_;
 
         std::vector<std::vector<char>> pixels_;
-
-        //const std::vector<std::vector<char>> pixels_; //NEW (didn't work)
-        //std::vector<std::vector<int>> pixels_(n, vector<int> (m));   //SIZE: n rows, m columns
 
     };
 }  // namespace naivebayes

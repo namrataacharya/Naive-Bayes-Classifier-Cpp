@@ -314,6 +314,16 @@ TEST_CASE("Class probability tests: P(class=c)") {
     }
 }
 
+TEST_CASE("Save/load model from file") {
+    naivebayes::ImageProcessor processor;
+
+    std::ifstream test_image_processor("../../../../../../data/testsample.txt");
+    test_image_processor >> processor;
+
+    naivebayes::Model model(processor);
+    model.TrainModel(1);
+}
+
 /*
 TODO: Rename this test file. You'll also need to modify CMakeLists.txt.
 

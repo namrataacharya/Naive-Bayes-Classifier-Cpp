@@ -26,30 +26,13 @@ namespace naivebayes {
         image_length_ = length;
     }*/
 
+    /*
     int ImageProcessor::GetNumImages() { //TESTING
         return test_num_images;
     }
 
     int ImageProcessor::GetNumLabels() { //TESTING
         return test_num_labels_;
-    }
-
-    /*
-    int ImageProcessor::GetLineCount() { //TESTING
-        return line_count_;
-    }*/
-
-    /*
-    int ImageProcessor::GetLineCount2() { //TESTING
-        return line_count_2_;
-    }*/
-
-    /*
-    void ImageProcessor::ImagesPlus1() {
-        test_num_images++;
-    }
-    void ImageProcessor::LabelsPlus1() {
-        test_num_images++;
     }*/
 
     std::istream &operator>>(std::istream &in, ImageProcessor &processor) {

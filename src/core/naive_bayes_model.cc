@@ -1,4 +1,5 @@
 #include <core/naive_bayes_model.h>
+#include <iostream>
 
 namespace naivebayes {
 
@@ -50,9 +51,7 @@ void Model::FindClassFrequencies() {
     for (Image &image : training_images_) {
         class_frequencies_[image.GetLabel()]++;
     }
-    v_ = class_frequencies_.size();
-
-    //v_ = class_frequency_.size();
+    //v_ = class_frequencies_.size();
 }
 
     // (k_ + class_frequency_[c]) / (10k_ + training_images_.size())
@@ -64,36 +63,25 @@ void Model::CalculateClassProbability() { // P(class = c)
         double probability = (k_ + class_frequency_[i]) / ((v_ * k_) + training_images_.size());
         class_probability_[i] = probability;
     }*/
+    int v = class_frequencies_.size();
 
     //VECTOR IMPLEMENTATION - KEEP THIS
     for (int i = 0; i < num_classes_; i++) {
-        //double probability = ((k_ + class_frequencies_[i]) / (double(v_ * k_) + training_images_.size()));
-        double probability = (double(1 + class_frequencies_[i]) / double((2 * 1) + training_images_.size()));
+        double probability = (double(k_ + class_frequencies_[i]) / double((v * k_) + training_images_.size()));
         class_probabilities_[i] = probability;
     }
 }
 
 void Model::CalculatePixelProbability() { // P(F(i,j) = f | class = c)
-    //vector<vector<vector<vector<int>>>> vec(100, vector<vector<vector<int>>>(200, vector<vector<int>>(100, vector<int>(50))));
     int v = 2;
-
-    /*
-    std::vector<
-            std::vector<
-                    std::vector<
-                            std::vector<int>>>> pixel_match_count(image_width_,
-                                                           std::vector<std::vector<std::vector<int>>>(image_width_,
-                                                           std::vector<std::vector<int>>(v, // T(1) / F(0)
-                                                           std::vector<int>(num_classes_)))); //was class_frequency_.size()
-                                                           */
 
     std::vector<
             std::vector<
                     std::vector<
                             std::vector<double>>>> pixel_match_count(image_width_,
-                                                                  std::vector<std::vector<std::vector<double>>>(image_width_,
-                                                                  std::vector<std::vector<double>>(v, // T(1) / F(0)
-                                                                  std::vector<double>(num_classes_)))); //was class_frequency_.size()
+                                                      std::vector<std::vector<std::vector<double>>>(image_width_,
+                                                      std::vector<std::vector<double>>(v,  // T(1)/F(0)
+                                                      std::vector<double>(num_classes_))));
 
     //vector[row (i)][col (j)][shaded (0 or 1)][class (c)] - see slides
 
@@ -108,28 +96,10 @@ void Model::CalculatePixelProbability() { // P(F(i,j) = f | class = c)
                     for (int j = 0; j < image_width_; j++) {
                         if (PixelShaded(image, i, j) == true) {
                             pixel_match_count[i][j][1][c]++; // 1 = SHADED
-                            pixel_match_count[i][j][0][c] += 0; // 0 = UNSHADED
-
-                            //Delete?
-                            /*
-                            pixel_probability_[i][j][1][c] = (double(k_ + pixel_match_count[i][j][1][c])
-                                                                 / double((v * k_) + class_frequencies_[c]));
-
-                            pixel_probability_[i][j][0][c] = (double(k_ + pixel_match_count[i][j][1][c])
-                                                             / double((v * k_) + class_frequencies_[c]));
-                                                             */
 
                         } else {
-                            pixel_match_count[i][j][1][c] += 0; // 1 = SHADED
                             pixel_match_count[i][j][0][c]++; // 0 = UNSHADED
 
-                            //Delete?
-                            /*
-                            pixel_probability_[i][j][1][c] = (double(k_ + pixel_match_count[i][j][1][c])
-                                                             / double((v * k_) + class_frequencies_[c]));
-
-                            pixel_probability_[i][j][0][c] = (double(k_ + pixel_match_count[i][j][1][c])
-                                                             / double((v * k_) + class_frequencies_[c]));*/
                         }
                     }
                 }
@@ -256,12 +226,64 @@ double Model::GetPixelProbability(int row, int col, bool shaded, int c) {
 
 
 // >> - Loads Model from file (OVERLOAD)
-// << - Save Model from file (OVERLOAD)
+std::istream &operator>>(std::istream &in, Model &model) {
 
+    int num_classes;
+    in >> num_classes;
+    model.num_classes_ = num_classes;
 
-void Model::LoadModel() {}
+    for (int i = 0; i < num_classes; i++) {
+        double probability;
+        in >> probability;
 
-void Model::SaveModel() {}
+        model.class_probabilities_.push_back(0.0);
+        model.class_probabilities_[i] = probability;
+    }
+
+    std::string line;
+
+    while (getline(in,line)) {
+        int i;
+        int j;
+        int shade;
+        int c;
+        double probability;
+        in >> i >> j >> shade >> c >> probability;
+        model.image_width_ = i;
+        model.pixel_probability_[i][j][shade][c] = probability;
+    }
+
+    return in;
+}
+
+// << - Save Model to file (OVERLOAD)
+std::ostream &operator<<(std::ostream &out, Model &model) {
+
+    int num_classes = model.class_probabilities_.size();
+    out << num_classes << std::endl;
+
+    for (int i = 0; i < num_classes; i++) {
+        out << model.class_probabilities_[i] <<std::endl;
+    }
+
+    for (int i = 0; i < model.image_width_; i++) {
+        for (int j = 0; j < model.image_width_; j++) {
+            for (int shade = 0; shade < model.v_; shade++) {
+                for (int c = 0; c < model.class_frequencies_.size(); c++) {
+
+                    out << i << std::endl;
+                    out << j << std::endl;
+                    out << shade << std::endl;
+                    out << c << std::endl;
+                    out << model.pixel_probability_[i][j][shade][c] << std::endl;
+
+                }
+            }
+        }
+    }
+
+    return out;
+}
 
 /*
 std::vector<int> Model::GetImageClasses() {

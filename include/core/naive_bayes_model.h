@@ -34,18 +34,23 @@ class Model {
     //double GetPixelProbability(int row, int col, bool shaded, int c);
     double GetPixelProbability(double row, double col, double shaded, double c);
 
+    friend std::istream &operator>>(std::istream &in, Model &model);
+    friend std::ostream &operator<<(std::ostream &out, Model &model);
+
+
     std::vector<Image> GetTrainingImages();
 
-
+    /*
 
     void LoadModel();
 
     void SaveModel();
-
+     */
     /*
   std::vector<int> GetImageClasses();
   std::vector<Image> GetTrainingImages();
    */
+
   private:
 
     int image_width_;
@@ -63,6 +68,7 @@ class Model {
     std::vector<Image> training_images_; //WORKS W/ BOTH
     std::vector<std::vector<std::vector<std::vector<double>>>> pixel_probability_; //WORKS W/ BOTH (Double)
 
+    /*
     //std::vector<std::vector<std::vector<std::vector<int>>>> pixel_probability_; //WORKS W/ BOTH
     //std::vector<int> pixel_probability_;
 
@@ -74,13 +80,13 @@ class Model {
 
     //std::vector<int> image_classes_;
     //map[row (i)][col (j)][shaded (bool)][class (c)] - see slides
-    /*
-    std::unordered_map<int, std::unordered_map<int,
-        std::unordered_map<bool, std::unordered_map<int, double>>>> pixel_probability;
-        */
+
+    //std::unordered_map<int, std::unordered_map<int,
+        //std::unordered_map<bool, std::unordered_map<int, double>>>> pixel_probability;
     //std::unordered_map<int, double> pixel_probability;
     //std::vector<double> class_chance_;
     //std::vector<double> pixel_shade_chance_;
+     */
 };
 
 }  // namespace naivebayes

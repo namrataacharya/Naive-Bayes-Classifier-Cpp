@@ -17,9 +17,11 @@ public:
     std::vector<int> GetClasses();
     int GetImageLength();
 
-    int GetNumLabels(); //why is this going wrong
+    /*
+    int GetNumLabels();
 
     int GetNumImages();
+    */
     /*
     int GetLineCount();
     //int GetLineCount2();
@@ -43,7 +45,6 @@ private:
     int test_num_images;
 
     int line_count_ = 1;
-    //int line_count_2_ = 1;
 
 };
 }  // namespace naivebayes
