@@ -12,15 +12,15 @@ namespace naivebayes {
         pixels_ = pixels;
     }
 
-    int Image::GetLabel() {
+    const int Image::GetLabel() {
         return label_;
     }
 
-    int Image::GetLength() {
+    const int Image::GetLength() {
         return length_;
     }
 
-    std::vector<std::vector<char>>& Image::GetPixels() {
+    const std::vector<std::vector<char>>& Image::GetPixels() {
         return pixels_;
     }
 

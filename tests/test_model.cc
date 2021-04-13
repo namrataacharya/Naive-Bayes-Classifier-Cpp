@@ -8,6 +8,29 @@
 
 
 TEST_CASE("Image processing test") {
+
+    //*
+    SECTION("traingingimagesandlabels.txt Set Up") {
+        naivebayes::ImageProcessor processor;
+
+        std::ifstream test_image_processor("../../../../../../data/trainingimagesandlabels.txt");
+        test_image_processor >> processor;
+
+        naivebayes::Model model(processor);
+
+        int length = processor.GetImageLength();
+
+        int num_training_images = model.GetTrainingImages().size();
+        int vec_size = processor.GetImages().size();
+
+
+        REQUIRE(length == 28);
+        REQUIRE(num_training_images == 5000);
+        REQUIRE(vec_size == 5000);
+    }
+    //*/
+
+
     SECTION("testsample.txt Set Up") {
         naivebayes::ImageProcessor processor;
 
@@ -274,6 +297,26 @@ TEST_CASE("Save/load model from file") {
 
     saved_file << model;
     loaded_file >> new_model;
+
+
+    //TRAININGIMAGESANDMODELS SAVE
+    /*
+    naivebayes::ImageProcessor processor2;
+    std::ifstream test_image_processor2("../../../../../../data/trainingimagesandlabels.txt");
+    test_image_processor2 >> processor2;
+
+    //trains model to be saved
+    naivebayes::Model model2(processor2);
+    model2.TrainModel(1);
+
+    //creates file to save model in /data/saved_file.txt
+    std::ofstream saved_file2("../../../../../../data/test_model_ignore.txt");
+
+    saved_file2 << model2;
+
+    //TRAININGIMAGESANDMODELS END
+     */
+
 
     SECTION("P(class = 0) equality for both models") {
         REQUIRE(model.GetClassProbability(0) == Approx(new_model.GetClassProbability(0)));

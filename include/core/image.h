@@ -24,19 +24,22 @@ namespace naivebayes {
          * Gets the image's label
          * @return the label of the image
          */
-        int GetLabel();
+        //int GetLabel(); //OG
+        const int GetLabel();
 
         /**
          * Gets the image's dimensions (width/length)
          * @return the image's length
          */
-        int GetLength();
+        //int GetLength(); //OG
+        const int GetLength();
 
         /**
          * Gets the pixels of an image to be examined by the model
          * @return 2d array of chars representing an individual pixel
          */
-        std::vector<std::vector<char>>& GetPixels();
+        //std::vector<std::vector<char>>& GetPixels(); //OG
+        const std::vector<std::vector<char>>& GetPixels();
 
     private:
 
