@@ -12,6 +12,21 @@ namespace naivebayes {
         pixels_ = pixels;
     }
 
+    //used in sketchpad
+    Image::Image(int length, std::vector<std::vector<char>> &pixels) {
+        length_ = length;
+        pixels_ = pixels;
+    }
+
+    //used in sketchpad
+    Image::Image(int length) {
+        length_ = length;
+        //created 2d vector of pixels based on image length from sketchpad
+        std::vector<std::vector<char>> copy_pixels (length, std::vector<char> (length));
+        pixels_ = copy_pixels;
+    }
+
+
     const int Image::GetLabel() {
         return label_;
     }
@@ -20,7 +35,13 @@ namespace naivebayes {
         return length_;
     }
 
+    /*
     const std::vector<std::vector<char>>& Image::GetPixels() {
+        return pixels_;
+    }*/
+
+    //removed const return type so sketchpad can change image pixels
+    std::vector<std::vector<char>>& Image::GetPixels() {
         return pixels_;
     }
 

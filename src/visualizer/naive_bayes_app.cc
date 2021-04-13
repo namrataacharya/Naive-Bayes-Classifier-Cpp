@@ -9,7 +9,8 @@ NaiveBayesApp::NaiveBayesApp()
                  kWindowSize - 2 * kMargin) {
   ci::app::setWindowSize((int) kWindowSize, (int) kWindowSize);
 
-  //read data files here??
+  //train model here and give to classifier to classify sketchpad image
+
 }
 
 void NaiveBayesApp::draw() {
@@ -42,7 +43,7 @@ void NaiveBayesApp::keyDown(ci::app::KeyEvent event) {
       // sketchpad and update current_prediction_
       break;
 
-    case ci::app::KeyEvent::KEY_DELETE:
+      case ci::app::KeyEvent::KEY_BACKSPACE:   //KEY_DELETE: -> //KEY_BACKSPACE used for mac
       sketchpad_.Clear();
       break;
   }

@@ -20,6 +20,10 @@ namespace naivebayes {
          */
         Image(int label, int length, std::vector<std::vector<char>> &pixels);
 
+        Image(int length, std::vector<std::vector<char>> &pixels); //sketchpad //DEL?
+
+        Image(int length); //sketchpad
+
         /**
          * Gets the image's label
          * @return the label of the image
@@ -38,15 +42,18 @@ namespace naivebayes {
          * Gets the pixels of an image to be examined by the model
          * @return 2d array of chars representing an individual pixel
          */
-        //std::vector<std::vector<char>>& GetPixels(); //OG
-        const std::vector<std::vector<char>>& GetPixels();
+        //std::vector<std::vector<char>>& GetPixels() const; //OG
+        std::vector<std::vector<char>>& GetPixels(); //removed const to sketchpad can change pixels
+
+
+        std::vector<std::vector<char>> pixels_; //WEEK 2 - made public for sketchpad Draw() access
 
     private:
 
         int length_;
         int label_;
 
-        std::vector<std::vector<char>> pixels_;
+        //std::vector<std::vector<char>> pixels_; //WEEK 1 OG  = private
 
     };
 }  // namespace naivebayes

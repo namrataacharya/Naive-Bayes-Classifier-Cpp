@@ -11,7 +11,14 @@ Sketchpad::Sketchpad(const vec2& top_left_corner, size_t num_pixels_per_side,
     : top_left_corner_(top_left_corner),
       num_pixels_per_side_(num_pixels_per_side),
       pixel_side_length_(sketchpad_size / num_pixels_per_side),
-      brush_radius_(brush_radius) {}
+      brush_radius_(brush_radius),
+
+      //should create new image in constructor and change pixel shade when drawing later
+      //std::vector<std::vector<char>> pixels (num_pixels_per_side, std::vector<char> (num_pixels_per_side)),
+      // std::vector<std::vector<int>> pixels (num_)
+
+      image_(num_pixels_per_side) {} //, std::vector<std::vector<int>> pixels (num_)){}
+
 
 void Sketchpad::Draw() const {
   for (size_t row = 0; row < num_pixels_per_side_; ++row) {
@@ -21,11 +28,22 @@ void Sketchpad::Draw() const {
 
       // TODO: Replace the if-statement below with an if-statement that checks
       // if the pixel at (row, col) is currently shaded
+      /*
       if (row * row + col * col <= 20 * 20) {
         ci::gl::color(ci::Color::gray(0.3f));
       } else {
         ci::gl::color(ci::Color("white"));
       }
+       */
+
+      //REPLACE ABOVE W FOLLOWING CODE:
+      if (image_.pixels_[row][col] == '#') {
+          ci::gl::color(ci::Color::gray(0.3f));
+      } else {
+          ci::gl::color(ci::Color("white"));
+      }
+
+
 
       vec2 pixel_top_left = top_left_corner_ + vec2(col * pixel_side_length_,
                                                     row * pixel_side_length_);
@@ -53,6 +71,7 @@ void Sketchpad::HandleBrush(const vec2& brush_screen_coords) {
       if (glm::distance(brush_sketchpad_coords, pixel_center) <=
           brush_radius_) {
         // TODO: Add code to shade in the pixel at (row, col)
+        image_.GetPixels()[row][col] = '#';
       }
     }
   }
@@ -60,6 +79,11 @@ void Sketchpad::HandleBrush(const vec2& brush_screen_coords) {
 
 void Sketchpad::Clear() {
   // TODO: implement this method
+  for (int i = 0; i < num_pixels_per_side_; i++) {
+      for (int j = 0; j < num_pixels_per_side_; j++) {
+          image_.GetPixels()[i][j] = ' ';
+      }
+  }
 }
 
 }  // namespace visualizer
