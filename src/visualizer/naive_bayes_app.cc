@@ -13,7 +13,6 @@ NaiveBayesApp::NaiveBayesApp()
   ci::app::setWindowSize((int) kWindowSize, (int) kWindowSize);
 
   //train model here and give to classifier to classify sketchpad image
-
   /*
     naivebayes::ImageProcessor processor;
 
@@ -24,7 +23,6 @@ NaiveBayesApp::NaiveBayesApp()
     model.TrainModel(1);
     */
 
-  //*
     naivebayes::ImageProcessor processor;
     std::ifstream txt_file("../../../../../../data/trainingimagesandlabels.txt");
     std::cout << txt_file.is_open() << std::endl;
@@ -33,19 +31,8 @@ NaiveBayesApp::NaiveBayesApp()
 
     naivebayes::Model model(processor);
     model.TrainModel(1);
-    //*/
 
     classifier_.SetModel(model);
-
-    /*
-    //Classifier copy_classifier_(model);
-    //classifier_ = &copy_classifier_;
-    //give model to classifier ...how?
-
-    //naivebayes::Classifier classifier;
-     */
-
-
 }
 
 void NaiveBayesApp::draw() {
@@ -78,8 +65,9 @@ void NaiveBayesApp::keyDown(ci::app::KeyEvent event) {
       // sketchpad and update current_prediction_
 
       current_prediction_ = classifier_.ClassifyImage(sketchpad_.GetImage());
-        //current_prediction_ = 4;
 
+      //PREDICTED LABEL
+      sketchpad_.GetImage().SetLabel(current_prediction_); //sets image label to the prediction - keep or delete?
       break;
 
       case ci::app::KeyEvent::KEY_BACKSPACE:   //KEY_DELETE: -> //KEY_BACKSPACE used for mac

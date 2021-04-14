@@ -40,7 +40,8 @@ FetchContent_Declare(
 FetchContent_GetProperties(catch2)
 if(NOT catch2_POPULATED)
     FetchContent_Populate(catch2)
-    add_library(catch2 INTERFACE) # include/core/classifier.h) # include/core/image.h) # include/core/image_processor.h)
+    add_library(catch2 INTERFACE) # tests/test_classifier.cc) # include/core/classifier.h)
+                                    # include/core/image.h) # include/core/image_processor.h)
     target_include_directories(catch2 INTERFACE ${catch2_SOURCE_DIR}/single_include)
 endif()
 
@@ -58,7 +59,8 @@ list(APPEND SOURCE_FILES    ${CORE_SOURCE_FILES}
                             src/visualizer/naive_bayes_app.cc
                             src/visualizer/sketchpad.cc)
 
-list(APPEND TEST_FILES tests/test_model.cc)
+list(APPEND TEST_FILES tests/test_model.cc
+                        tests/test_classifier.cc)
 
 add_executable(train-model apps/train_model_main.cc ${CORE_SOURCE_FILES}
         src/core/image_processor.cc

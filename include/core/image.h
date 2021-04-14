@@ -20,7 +20,7 @@ namespace naivebayes {
          */
         Image(int label, int length, std::vector<std::vector<char>> &pixels);
 
-        Image(int length, std::vector<std::vector<char>> &pixels); //sketchpad //DEL?
+        //Image(int length, std::vector<std::vector<char>> &pixels); //sketchpad //DEL?
 
         Image(int length); //sketchpad
 
@@ -47,6 +47,9 @@ namespace naivebayes {
 
 
         std::vector<std::vector<char>> pixels_; //WEEK 2 - made public for sketchpad Draw() access
+
+
+        void SetLabel(int label);
 
     private:
 

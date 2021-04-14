@@ -12,11 +12,12 @@ namespace naivebayes {
         pixels_ = pixels;
     }
 
-    //used in sketchpad
+    //used in sketchpad - OVERLOADED CONSTRUCTOR
+    /*
     Image::Image(int length, std::vector<std::vector<char>> &pixels) {
         length_ = length;
         pixels_ = pixels;
-    }
+    }*/
 
     //used in sketchpad
     Image::Image(int length) {
@@ -43,6 +44,12 @@ namespace naivebayes {
     //removed const return type so sketchpad can change image pixels
     std::vector<std::vector<char>>& Image::GetPixels() {
         return pixels_;
+    }
+
+
+    //added during classifier - WEEK 2
+    void Image::SetLabel(int label) {
+        label_ = label;
     }
 
 }  // namespace naivebayes
