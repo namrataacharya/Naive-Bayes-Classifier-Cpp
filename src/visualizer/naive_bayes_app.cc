@@ -13,6 +13,8 @@ NaiveBayesApp::NaiveBayesApp()
   ci::app::setWindowSize((int) kWindowSize, (int) kWindowSize);
 
   //train model here and give to classifier to classify sketchpad image
+
+  /*
     naivebayes::ImageProcessor processor;
 
     std::ifstream txt_file("data/trainingimagesandlabels.txt");
@@ -20,14 +22,28 @@ NaiveBayesApp::NaiveBayesApp()
 
     naivebayes::Model model(processor);
     model.TrainModel(1);
+    */
+
+  //*
+    naivebayes::ImageProcessor processor;
+    std::ifstream txt_file("../../../../../../data/trainingimagesandlabels.txt");
+    std::cout << txt_file.is_open() << std::endl;
+
+    txt_file >> processor;
+
+    naivebayes::Model model(processor);
+    model.TrainModel(1);
+    //*/
 
     classifier_.SetModel(model);
 
+    /*
     //Classifier copy_classifier_(model);
     //classifier_ = &copy_classifier_;
     //give model to classifier ...how?
 
     //naivebayes::Classifier classifier;
+     */
 
 
 }
@@ -60,10 +76,15 @@ void NaiveBayesApp::keyDown(ci::app::KeyEvent event) {
     case ci::app::KeyEvent::KEY_RETURN:
       // ask your classifier to classify the image that's currently drawn on the
       // sketchpad and update current_prediction_
+
+      current_prediction_ = classifier_.ClassifyImage(sketchpad_.GetImage());
+        //current_prediction_ = 4;
+
       break;
 
       case ci::app::KeyEvent::KEY_BACKSPACE:   //KEY_DELETE: -> //KEY_BACKSPACE used for mac
       sketchpad_.Clear();
+      current_prediction_ = -1;
       break;
   }
 }

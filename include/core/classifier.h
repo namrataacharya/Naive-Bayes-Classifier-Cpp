@@ -1,5 +1,5 @@
 // Created by Namrata Acharya on 4/13/21.
-
+#pragma once
 //#include <naive_bayes_model.h>
 #include "naive_bayes_model.h"
 
@@ -17,7 +17,11 @@ class Classifier {
 
         void SetModel(Model &model);
 
-        void CalculateLikelihoodScores();
+        void ResetLikelihoodScores();
+
+        int ClassifyImage(Image &image); //returns class # image should belong to
+
+        void CalculateLikelihoodScores(Image &image);
 
         double GetLikelihoodScore(int c);
 

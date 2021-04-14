@@ -3,9 +3,18 @@
 #include "cinder/app/App.h"
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
+
 #include "sketchpad.h"
-#import "../core/classifier.h"
-#import <naive_bayes_app.h>
+//#include <sketchpad.h>
+#include "../core/classifier.h"
+//#include <../core/classifier.h>
+#include "naive_bayes_app.h"
+//#include <naive_bayes_app.h>
+
+
+
+//#import <naive_bayes_app.h>
+
 //#import <core/classifier.h>
 //#import <../core/classifier.h>
 

@@ -50,6 +50,8 @@ class Sketchpad {
    */
   void Clear();
 
+  Image& GetImage();
+
  private:
   glm::vec2 top_left_corner_;
 
@@ -60,7 +62,7 @@ class Sketchpad {
 
   double brush_radius_;
 
-  Image image_;
+  Image image_; //creates new image
 };
 
 }  // namespace visualizer

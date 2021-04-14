@@ -14,10 +14,12 @@ Sketchpad::Sketchpad(const vec2& top_left_corner, size_t num_pixels_per_side,
       brush_radius_(brush_radius),
 
       //should create new image in constructor and change pixel shade when drawing later
-      //std::vector<std::vector<char>> pixels (num_pixels_per_side, std::vector<char> (num_pixels_per_side)),
-      // std::vector<std::vector<int>> pixels (num_)
+        //std::vector<std::vector<char>> pixels (num_pixels_per_side, std::vector<char> (num_pixels_per_side)),
+        // std::vector<std::vector<int>> pixels (num_)
 
-      image_(num_pixels_per_side) {} //, std::vector<std::vector<int>> pixels (num_)){}
+
+      // this seems to work fine (label of image not set)
+      image_(num_pixels_per_side) {}
 
 
 void Sketchpad::Draw() const {
@@ -83,6 +85,10 @@ void Sketchpad::Clear() {
           image_.GetPixels()[i][j] = ' ';
       }
   }
+}
+
+Image& Sketchpad::GetImage() {
+    return image_;
 }
 
 }  // namespace visualizer
