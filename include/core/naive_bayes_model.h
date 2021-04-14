@@ -85,6 +85,10 @@ class Model {
      */
     std::vector<Image> GetTrainingImages();
 
+    std::vector<double> GetClassProbabilities();
+
+    int GetImageLength();
+
   private:
 
     int image_width_;

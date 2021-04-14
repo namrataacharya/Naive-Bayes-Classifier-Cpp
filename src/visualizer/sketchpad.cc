@@ -44,7 +44,6 @@ void Sketchpad::Draw() const {
       }
 
 
-
       vec2 pixel_top_left = top_left_corner_ + vec2(col * pixel_side_length_,
                                                     row * pixel_side_length_);
 

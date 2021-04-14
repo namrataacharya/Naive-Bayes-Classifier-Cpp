@@ -1,4 +1,7 @@
 #include <visualizer/naive_bayes_app.h>
+#include <core/image_processor.h>
+#include <core/naive_bayes_model.h>
+#include <core/classifier.h>
 
 namespace naivebayes {
 
@@ -10,6 +13,22 @@ NaiveBayesApp::NaiveBayesApp()
   ci::app::setWindowSize((int) kWindowSize, (int) kWindowSize);
 
   //train model here and give to classifier to classify sketchpad image
+    naivebayes::ImageProcessor processor;
+
+    std::ifstream txt_file("data/trainingimagesandlabels.txt");
+    txt_file >> processor;
+
+    naivebayes::Model model(processor);
+    model.TrainModel(1);
+
+    classifier_.SetModel(model);
+
+    //Classifier copy_classifier_(model);
+    //classifier_ = &copy_classifier_;
+    //give model to classifier ...how?
+
+    //naivebayes::Classifier classifier;
+
 
 }
 
