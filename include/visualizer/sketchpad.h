@@ -50,6 +50,10 @@ class Sketchpad {
    */
   void Clear();
 
+  /**
+   * Gets Image drawn on sketchpad by user
+   * @return sketchpad image
+   */
   Image& GetImage();
 
  private:
@@ -62,7 +66,7 @@ class Sketchpad {
 
   double brush_radius_;
 
-  Image image_; //creates new image
+  Image image_;
 };
 
 }  // namespace visualizer

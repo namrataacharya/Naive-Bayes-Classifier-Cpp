@@ -21,21 +21,18 @@ public:
      * Gets the images found in the txt file
      * @return vector of Image objects
      */
-    //std::vector<Image> GetImages(); //OG
     const std::vector<Image>& GetImages();
 
     /**
      * Gets the distinct labels/image classes found in the txt file
      * @return vector of distinct image labels
      */
-    //std::vector<int> GetClasses(); //OG
     const std::vector<int>& GetClasses();
 
     /**
      * Gets the length the images found in the txt file
      * @return number representing image length
      */
-    //int GetImageLength(); //OG
     const int GetImageLength();
 
     /**

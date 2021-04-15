@@ -97,7 +97,6 @@ TEST_CASE("Classifier accuracy") {
 TEST_CASE("LikelihoodScore scores test") {
     naivebayes::ImageProcessor processor;
     std::ifstream test_image_processor("../../../../../../data/testsample.txt");
-    std::cout << test_image_processor.is_open() << std::endl;
 
     test_image_processor >> processor;
 
@@ -129,7 +128,6 @@ TEST_CASE("LikelihoodScore scores test") {
 TEST_CASE("Image classification test") {
     naivebayes::ImageProcessor processor;
     std::ifstream test_image_processor("../../../../../../data/testsample.txt");
-    std::cout << test_image_processor.is_open() << std::endl;
 
     test_image_processor >> processor;
 

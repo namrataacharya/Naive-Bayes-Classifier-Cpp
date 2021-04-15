@@ -85,8 +85,16 @@ class Model {
      */
     std::vector<Image> GetTrainingImages();
 
+    /**
+     * Gets all the model's image class probabilities
+     * @return vector of class probabilities
+     */
     std::vector<double> GetClassProbabilities();
 
+    /**
+     * Gets dimensions of training images of the model
+     * @return int representing image length
+     */
     int GetImageLength();
 
   private:

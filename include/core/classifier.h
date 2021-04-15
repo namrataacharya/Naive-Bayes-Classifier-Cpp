@@ -1,6 +1,5 @@
-// Created by Namrata Acharya on 4/13/21.
 #pragma once
-//#include <naive_bayes_model.h>
+
 #include "naive_bayes_model.h"
 
 #ifndef NAIVE_BAYES_CLASSIFIER_H
@@ -11,22 +10,41 @@ namespace naivebayes {
 class Classifier {
 
     public:
-        Classifier();
 
-        //Classifier(const Model &model);
+    /**
+     * Constructor that creates an image classifier
+     */
+    Classifier();
 
-        void SetModel(Model &model);
+    /**
+     * Sets the model to be used by the classifier and gives classifier default details
+     * @param model to be used by classifier
+     */
+    void SetModel(Model &model);
 
-        void ResetLikelihoodScores();
+    /**
+     * Clears and rebuilds likelihood scores vector
+     */
+    void ResetLikelihoodScores();
 
-        int ClassifyImage(Image &image); //returns class # image should belong to
+    /**
+     * Classifies class to which passed in image belongs to
+     * @param image passed in for classification
+     * @return predicted class image belongs to
+     */
+    int ClassifyImage(Image &image);
 
-        void CalculateLikelihoodScores(Image &image);
+    /**
+     * Calculates likelihood scores for the image based on info from the model
+     * @param image that scores are being calculated for
+     */
+    void CalculateLikelihoodScores(Image &image);
 
-        std::vector<double> GetLikelihoodScores();
-
-        //double GetLikelihoodScore(int c);
-
+    /**
+     * Gets the vector of likelihood scores that was already calculated
+     * @return vector of likelihood scores
+     */
+    std::vector<double> GetLikelihoodScores();
 
 
     private:
@@ -34,12 +52,7 @@ class Classifier {
     int num_classes_;
     int image_length_;
     Model model_;
-
     std::vector<double> likelihood_scores_;
-
-
-
-
 
 };
 }

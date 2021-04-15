@@ -12,33 +12,16 @@ Sketchpad::Sketchpad(const vec2& top_left_corner, size_t num_pixels_per_side,
       num_pixels_per_side_(num_pixels_per_side),
       pixel_side_length_(sketchpad_size / num_pixels_per_side),
       brush_radius_(brush_radius),
-
-      //should create new image in constructor and change pixel shade when drawing later
-        //std::vector<std::vector<char>> pixels (num_pixels_per_side, std::vector<char> (num_pixels_per_side)),
-        // std::vector<std::vector<int>> pixels (num_)
-
-
-      // this seems to work fine (label of image not set)
       image_(num_pixels_per_side) {}
 
 
 void Sketchpad::Draw() const {
   for (size_t row = 0; row < num_pixels_per_side_; ++row) {
     for (size_t col = 0; col < num_pixels_per_side_; ++col) {
-      // Currently, this will draw a quarter circle centered at the top-left
-      // corner with a radius of 20
 
       // TODO: Replace the if-statement below with an if-statement that checks
       // if the pixel at (row, col) is currently shaded
-      /*
-      if (row * row + col * col <= 20 * 20) {
-        ci::gl::color(ci::Color::gray(0.3f));
-      } else {
-        ci::gl::color(ci::Color("white"));
-      }
-       */
 
-      //REPLACE ABOVE W FOLLOWING CODE:
       if (image_.pixels_[row][col] == '#') {
           ci::gl::color(ci::Color::gray(0.3f));
       } else {

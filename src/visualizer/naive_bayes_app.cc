@@ -12,20 +12,8 @@ NaiveBayesApp::NaiveBayesApp()
                  kWindowSize - 2 * kMargin) {
   ci::app::setWindowSize((int) kWindowSize, (int) kWindowSize);
 
-  //train model here and give to classifier to classify sketchpad image
-  /*
-    naivebayes::ImageProcessor processor;
-
-    std::ifstream txt_file("data/trainingimagesandlabels.txt");
-    txt_file >> processor;
-
-    naivebayes::Model model(processor);
-    model.TrainModel(1);
-    */
-
     naivebayes::ImageProcessor processor;
     std::ifstream txt_file("../../../../../../data/trainingimagesandlabels.txt");
-    std::cout << txt_file.is_open() << std::endl;
 
     txt_file >> processor;
 
@@ -36,7 +24,7 @@ NaiveBayesApp::NaiveBayesApp()
 }
 
 void NaiveBayesApp::draw() {
-  ci::Color8u background_color(255, 246, 148);  // light yellow
+  ci::Color8u background_color(255, 178, 112); //light orange
   ci::gl::clear(background_color);
 
   sketchpad_.Draw();
@@ -61,16 +49,14 @@ void NaiveBayesApp::mouseDrag(ci::app::MouseEvent event) {
 void NaiveBayesApp::keyDown(ci::app::KeyEvent event) {
   switch (event.getCode()) {
     case ci::app::KeyEvent::KEY_RETURN:
-      // ask your classifier to classify the image that's currently drawn on the
-      // sketchpad and update current_prediction_
+      // classifier to classifies the image that's currently drawn on the
+      // sketchpad and updates current_prediction_
 
       current_prediction_ = classifier_.ClassifyImage(sketchpad_.GetImage());
-
-      //PREDICTED LABEL
-      sketchpad_.GetImage().SetLabel(current_prediction_); //sets image label to the prediction - keep or delete?
+      sketchpad_.GetImage().SetLabel(current_prediction_);
       break;
 
-      case ci::app::KeyEvent::KEY_BACKSPACE:   //KEY_DELETE: -> //KEY_BACKSPACE used for mac
+      case ci::app::KeyEvent::KEY_BACKSPACE:
       sketchpad_.Clear();
       current_prediction_ = -1;
       break;
@@ -78,5 +64,4 @@ void NaiveBayesApp::keyDown(ci::app::KeyEvent event) {
 }
 
 }  // namespace visualizer
-
 }  // namespace naivebayes

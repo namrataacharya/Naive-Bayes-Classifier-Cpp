@@ -9,7 +9,6 @@
 
 TEST_CASE("Image processing test") {
 
-    //*
     SECTION("traingingimagesandlabels.txt Set Up") {
         naivebayes::ImageProcessor processor;
 
@@ -28,8 +27,6 @@ TEST_CASE("Image processing test") {
         REQUIRE(num_training_images == 5000);
         REQUIRE(vec_size == 5000);
     }
-    //*/
-
 
     SECTION("testsample.txt Set Up") {
         naivebayes::ImageProcessor processor;
