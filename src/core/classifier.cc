@@ -54,6 +54,9 @@ namespace naivebayes {
                 label_classification = i;
             }
         }
+        if (max_score == likelihood_scores_[0]) {
+            label_classification = 0;
+        }
 
         return label_classification; //if returns -1, INVALID (handle this later)
     }
@@ -79,6 +82,10 @@ namespace naivebayes {
 
             likelihood_scores_[c] = score;
         }
+    }
+
+    std::vector<double> Classifier::GetLikelihoodScores() {
+        return likelihood_scores_;
     }
 
 

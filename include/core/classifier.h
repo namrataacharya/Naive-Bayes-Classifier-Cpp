@@ -13,7 +13,7 @@ class Classifier {
     public:
         Classifier();
 
-        Classifier(const Model &model);
+        //Classifier(const Model &model);
 
         void SetModel(Model &model);
 
@@ -23,7 +23,9 @@ class Classifier {
 
         void CalculateLikelihoodScores(Image &image);
 
-        double GetLikelihoodScore(int c);
+        std::vector<double> GetLikelihoodScores();
+
+        //double GetLikelihoodScore(int c);
 
 
 
@@ -32,7 +34,6 @@ class Classifier {
     int num_classes_;
     int image_length_;
     Model model_;
-
 
     std::vector<double> likelihood_scores_;
 

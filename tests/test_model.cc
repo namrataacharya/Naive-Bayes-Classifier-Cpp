@@ -165,43 +165,43 @@ TEST_CASE("Pixel shade probability tests: P(F(i,j) = 0 | class = 1)") {
     model.TrainModel(1);
 
     //ROW 1
-    SECTION("P(F(0,0) = 1 | class = 0)") {
+    SECTION("P(F(0,0) = 0 | class = 1)") {
         double calculated_probability = model.GetPixelProbability(0, 0, false, 1);
         REQUIRE(calculated_probability == Approx(0.5));
     }
-    SECTION("P(F(0,1) = 1 | class = 0)") {
+    SECTION("P(F(0,1) = 0 | class = 1)") {
         double calculated_probability = model.GetPixelProbability(0, 1, false, 1);
         REQUIRE(calculated_probability == Approx(0.25));
     }
-    SECTION("P(F(0,2) = 1 | class = 0)") {
+    SECTION("P(F(0,2) = 0 | class = 1)") {
         double calculated_probability = model.GetPixelProbability(0, 2, false, 1);
         REQUIRE(calculated_probability == Approx(0.75));
     }
 
     //ROW 2
-    SECTION("P(F(1,0) = 1 | class = 0)") {
+    SECTION("P(F(1,0) = 0 | class = 1)") {
         double calculated_probability = model.GetPixelProbability(1, 0, false, 1);
         REQUIRE(calculated_probability == Approx(0.75));
     }
-    SECTION("P(F(1,1) = 1 | class = 0)") {
+    SECTION("P(F(1,1) = 0 | class = 1)") {
         double calculated_probability = model.GetPixelProbability(1, 1, false, 1);
         REQUIRE(calculated_probability == Approx(0.25));
     }
-    SECTION("P(F(1,2) = 1 | class = 0)") {
+    SECTION("P(F(1,2) = 0 | class = 1)") {
         double calculated_probability = model.GetPixelProbability(1, 2, false, 1);
         REQUIRE(calculated_probability == Approx(0.75));
     }
 
     //ROW 3
-    SECTION("P(F(2,0) = 1 | class = 0)") {
+    SECTION("P(F(2,0) = 0 | class = 1)") {
         double calculated_probability = model.GetPixelProbability(2, 0, false, 1);
         REQUIRE(calculated_probability == Approx(0.5));
     }
-    SECTION("P(F(2,1) = 1 | class = 0)") {
+    SECTION("P(F(2,1) = 0 | class = 1)") {
         double calculated_probability = model.GetPixelProbability(2, 1, false, 1);
         REQUIRE(calculated_probability == Approx(0.25));
     }
-    SECTION("P(F(2,2) = 1 | class = 0)") {
+    SECTION("P(F(2,2) = 0 | class = 1)") {
         double calculated_probability = model.GetPixelProbability(2, 2, false, 1);
         REQUIRE(calculated_probability == Approx(0.5));
     }
@@ -217,43 +217,43 @@ TEST_CASE("Pixel shade probability tests: P(F(i,j) = 1 | class = 1)") {
     model.TrainModel(1);
 
     //ROW 1
-    SECTION("P(F(0,0) = 1 | class = 0)") {
+    SECTION("P(F(0,0) = 1 | class = 1)") {
         double calculated_probability = model.GetPixelProbability(0, 0, true, 1);
         REQUIRE(calculated_probability == Approx(0.5));
     }
-    SECTION("P(F(0,1) = 1 | class = 0)") {
+    SECTION("P(F(0,1) = 1 | class = 1)") {
         double calculated_probability = model.GetPixelProbability(0, 1, true, 1);
         REQUIRE(calculated_probability == Approx(0.75));
     }
-    SECTION("P(F(0,2) = 1 | class = 0)") {
+    SECTION("P(F(0,2) = 1 | class = 1)") {
         double calculated_probability = model.GetPixelProbability(0, 2, true, 1);
         REQUIRE(calculated_probability == Approx(0.25));
     }
 
     //ROW 2
-    SECTION("P(F(1,0) = 1 | class = 0)") {
+    SECTION("P(F(1,0) = 1 | class = 1)") {
         double calculated_probability = model.GetPixelProbability(1, 0, true, 1);
         REQUIRE(calculated_probability == Approx(0.25));
     }
-    SECTION("P(F(1,1) = 1 | class = 0)") {
+    SECTION("P(F(1,1) = 1 | class = 1)") {
         double calculated_probability = model.GetPixelProbability(1, 1, true, 1);
         REQUIRE(calculated_probability == Approx(0.75));
     }
-    SECTION("P(F(1,2) = 1 | class = 0)") {
+    SECTION("P(F(1,2) = 1 | class = 1)") {
         double calculated_probability = model.GetPixelProbability(1, 2, true, 1);
         REQUIRE(calculated_probability == Approx(0.25));
     }
 
     //ROW 3
-    SECTION("P(F(2,0) = 1 | class = 0)") {
+    SECTION("P(F(2,0) = 1 | class = 1)") {
         double calculated_probability = model.GetPixelProbability(2, 0, true, 1);
         REQUIRE(calculated_probability == Approx(0.5));
     }
-    SECTION("P(F(2,1) = 1 | class = 0)") {
+    SECTION("P(F(2,1) = 1 | class = 1)") {
         double calculated_probability = model.GetPixelProbability(2, 1, true, 1);
         REQUIRE(calculated_probability == Approx(0.75));
     }
-    SECTION("P(F(2,2) = 1 | class = 0)") {
+    SECTION("P(F(2,2) = 1 | class = 1)") {
         double calculated_probability = model.GetPixelProbability(2, 2, true, 1);
         REQUIRE(calculated_probability == Approx(0.5));
     }
