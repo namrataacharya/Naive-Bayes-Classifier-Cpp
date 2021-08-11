@@ -8,15 +8,15 @@ namespace naivebayes {
 
     ImageProcessor::ImageProcessor() {}
 
-    std::vector<Image> ImageProcessor::GetImages() {
+    const std::vector<Image>& ImageProcessor::GetImages() {
         return images_;
     }
 
-    std::vector<int> ImageProcessor::GetClasses() {
+    const std::vector<int>& ImageProcessor::GetClasses() {
         return classes_;
     }
 
-    int ImageProcessor::GetImageLength() {
+    const int ImageProcessor::GetImageLength() {
         return image_length_;
     }
 
@@ -60,7 +60,8 @@ namespace naivebayes {
                     pixels.push_back(std::vector<char>(line.begin(), line.end()));
                 }
 
-                Image image = Image(label, side_length, pixels);
+                //Image image = Image(label, side_length, pixels); //OG WAY OF CREATING IMAGE OBJ
+                const Image image = Image(label, side_length, pixels);
 
 
                 //check if new image class/label has been found

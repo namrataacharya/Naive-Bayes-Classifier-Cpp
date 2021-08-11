@@ -21,16 +21,22 @@ namespace naivebayes {
         Image(int label, int length, std::vector<std::vector<char>> &pixels);
 
         /**
+         * Constructor that creates new Image objects to be examined by the model
+         * @param length - the image's dimensions (width/length)
+         */
+        Image(int length);
+
+        /**
          * Gets the image's label
          * @return the label of the image
          */
-        int GetLabel();
+        const int GetLabel();
 
         /**
          * Gets the image's dimensions (width/length)
          * @return the image's length
          */
-        int GetLength();
+        const int GetLength();
 
         /**
          * Gets the pixels of an image to be examined by the model
@@ -38,12 +44,18 @@ namespace naivebayes {
          */
         std::vector<std::vector<char>>& GetPixels();
 
+        /**
+         * Sets/changes an Image label
+         * @param image label
+         */
+        void SetLabel(int label);
+
+        std::vector<std::vector<char>> pixels_;
+
     private:
 
         int length_;
         int label_;
-
-        std::vector<std::vector<char>> pixels_;
 
     };
 }  // namespace naivebayes

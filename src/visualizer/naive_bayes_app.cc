@@ -1,4 +1,7 @@
 #include <visualizer/naive_bayes_app.h>
+#include <core/image_processor.h>
+#include <core/naive_bayes_model.h>
+#include <core/classifier.h>
 
 namespace naivebayes {
 
@@ -9,11 +12,19 @@ NaiveBayesApp::NaiveBayesApp()
                  kWindowSize - 2 * kMargin) {
   ci::app::setWindowSize((int) kWindowSize, (int) kWindowSize);
 
-  //read data files here??
+    naivebayes::ImageProcessor processor;
+    std::ifstream txt_file("../../../../../../data/trainingimagesandlabels.txt");
+
+    txt_file >> processor;
+
+    naivebayes::Model model(processor);
+    model.TrainModel(1);
+
+    classifier_.SetModel(model);
 }
 
 void NaiveBayesApp::draw() {
-  ci::Color8u background_color(255, 246, 148);  // light yellow
+  ci::Color8u background_color(255, 178, 112); //light orange
   ci::gl::clear(background_color);
 
   sketchpad_.Draw();
@@ -38,16 +49,19 @@ void NaiveBayesApp::mouseDrag(ci::app::MouseEvent event) {
 void NaiveBayesApp::keyDown(ci::app::KeyEvent event) {
   switch (event.getCode()) {
     case ci::app::KeyEvent::KEY_RETURN:
-      // ask your classifier to classify the image that's currently drawn on the
-      // sketchpad and update current_prediction_
+      // classifier to classifies the image that's currently drawn on the
+      // sketchpad and updates current_prediction_
+
+      current_prediction_ = classifier_.ClassifyImage(sketchpad_.GetImage());
+      sketchpad_.GetImage().SetLabel(current_prediction_);
       break;
 
-    case ci::app::KeyEvent::KEY_DELETE:
+      case ci::app::KeyEvent::KEY_BACKSPACE:
       sketchpad_.Clear();
+      current_prediction_ = -1;
       break;
   }
 }
 
 }  // namespace visualizer
-
 }  // namespace naivebayes

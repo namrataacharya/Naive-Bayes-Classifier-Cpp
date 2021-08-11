@@ -189,4 +189,12 @@ std::vector<Image> Model::GetTrainingImages() {
     return training_images_;
 }
 
+std::vector<double> Model::GetClassProbabilities() {
+    return class_probabilities_;
+}
+
+int Model::GetImageLength() {
+    return image_width_;
+}
+
 }  // namespace naivebayes

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <core/image.h>
 #include "cinder/gl/gl.h"
 
 namespace naivebayes {
@@ -49,6 +50,12 @@ class Sketchpad {
    */
   void Clear();
 
+  /**
+   * Gets Image drawn on sketchpad by user
+   * @return sketchpad image
+   */
+  Image& GetImage();
+
  private:
   glm::vec2 top_left_corner_;
 
@@ -58,6 +65,8 @@ class Sketchpad {
   double pixel_side_length_;
 
   double brush_radius_;
+
+  Image image_;
 };
 
 }  // namespace visualizer
